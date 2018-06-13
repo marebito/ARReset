@@ -27,6 +27,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // 显示原点和特征点
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: 0.2, y: 0.2))
+        path.addLine(to: CGPoint(x: 0.4, y: -0.2))
+        let shape = SCNShape(path: path, extrusionDepth: 0.1)
+        let node = SCNNode()
+        node.geometry = shape
+        node.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+        node.position = SCNVector3(0, 0, -0.4)
+        sceneView.scene.rootNode.addChildNode(node)
     }
     
     override func viewWillAppear(_ animated: Bool) {
